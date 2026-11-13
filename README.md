@@ -1,47 +1,34 @@
-# 쥬비랜드 (juviland)
+# section 02 – WHY ZUVILAND (연결 문장)
 
-라이브클래스 페이지에 iframe으로 넣는 섹션들을 한 저장소에서 관리합니다.
-빌드 과정 없이 정적 파일만으로 동작하며, GitHub Pages로 배포됩니다.
+`index.html` 하나로 동작합니다 (CSS·JS 포함). 폰트는 Pretendard(jsDelivr)를 사용합니다.
 
-- 섹션 관리 페이지: https://kimain1404-design.github.io/juviland/
-- 각 섹션 주소: `https://kimain1404-design.github.io/juviland/<폴더>/`
+## 반응형 기준
 
-## 구성
-
-```
-juviland/
-├─ index.html        섹션 관리 페이지 (전체 미리보기 + 라이브클래스 코드 복사)
-├─ README.md
-├─ .nojekyll         GitHub Pages가 파일을 그대로 서빙하도록 하는 빈 파일
-├─ juvi-hero/        section 01 · 히어로
-│   ├─ index.html · style.css · script.js · assets/
-│   ├─ liveklass-embed.html
-│   └─ README.md
-└─ juvi-why/         section 02 · WHY ZUVILAND (연결 문장)
-    ├─ index.html
-    ├─ liveklass-embed.html
-    └─ README.md
-```
-
-## 섹션 목록
-
-| 순서 | 폴더 | 내용 |
+| 구간 | 섹션 폭 | 동작 |
 |---|---|---|
-| 01 | `juvi-hero/` | 글로벌 농업 인재 경력패스 (히어로) |
-| 02 | `juvi-why/` | 왜 농업 인재의 여정을 끝까지 연결해야 할까요? |
+| PC | 1280px 이상 | Figma PC(1600 프레임, 콘텐츠 1200) 1x 그대로 |
+| PC 축소 | 1024 ~ 1279px | 1280 레이아웃을 비율 그대로 축소 (줄바꿈 동일) |
+| 태블릿 | 670 ~ 1023px | 모바일 구조, 크기 고정, 콘텐츠 최대 760px |
+| 모바일 | 669px 이하 | Figma 모바일(1080 프레임 = 360px @3x) 비율 그대로 |
 
-## 새 섹션 추가하기
+## 라이브클래스 iframe 높이
 
-1. 저장소에서 **Add file → Create new file** (또는 Upload files)로 `juvi-새이름/index.html` 을 만듭니다.
-   파일 이름 칸에 `폴더이름/index.html` 처럼 슬래시를 넣으면 폴더가 함께 만들어집니다.
-2. 같은 폴더에 `liveklass-embed.html` (라이브클래스용 iframe 코드)을 둡니다.
-3. 루트 `index.html` 의 `SECTIONS` 목록에 한 줄을 추가합니다.
-4. 1~2분 뒤 섹션 관리 페이지에서 확인합니다.
+| 구간 | 높이 |
+|---|---|
+| 669px 이하 | `270.05vw + 7px` |
+| 670 ~ 1023px | `1815px` |
+| 1024 ~ 1279px | `69.29vw + 5px` |
+| 1280px 이상 | `892px` |
 
-## 규칙
+## 모션
 
-- **이미 라이브클래스에 넣은 폴더 이름은 바꾸지 않습니다.** 주소가 바뀌면 라이브클래스에서 섹션이 사라집니다.
-- 섹션 파일은 반드시 각 폴더 안에 `index.html` 이름으로 둡니다. 루트에 올리면 404가 납니다.
-- 섹션의 글자 크기·여백·문구를 바꾸면 높이가 달라지므로 iframe `height` 계산식도 함께 고쳐야 합니다.
-  계산식은 각 폴더의 `liveklass-embed.html` 과 루트 `index.html` 의 `SECTIONS` 두 곳에 있습니다.
-- `margin-top/bottom: -50px` 은 라이브클래스 에디터의 문단 여백을 없애기 위한 값입니다.
+| 요소 | 시작 | 내용 |
+|---|---|---|
+| 배지 · 타이틀 · 서브카피 | 0 / 0.12 / 0.24s | 페이드 업 |
+| 카드 3개 | 0.1 / 0.25 / 0.4s | 페이드 업, 숫자 카운트업, 체크 아이콘 등장 |
+| 연결선 · 점 | 카드 이후 약 0.9s | 위에서 아래로 그려짐 |
+| 네이비 패널 · 잎 | 선 시작 +0.4s / +0.8s | 패널 등장, 잎 두 장이 자라남 |
+| 영문 · 국문 · 하단 문장 | +1.1 / +1.35 / +1.65s | 페이드 업 |
+| 밑줄 | +2.05s | 왼쪽에서 오른쪽으로 그려짐 |
+
+`prefers-reduced-motion` 을 켠 사용자에게는 모션 없이 바로 표시됩니다.
