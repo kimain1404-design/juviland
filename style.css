@@ -98,7 +98,7 @@ img { display: block; }
   padding-bottom: .08em;   /* 받침 잘림 방지 */
   margin-bottom: -.08em;
 }
-.line__inner { display: inline-block; }
+.line__inner { display: inline-block; white-space: nowrap; }
 
 .hero__desc {
   margin: 0;
@@ -107,6 +107,7 @@ img { display: block; }
   letter-spacing: -0.04em;
   color: var(--text-secondary);
   word-break: keep-all;
+  white-space: nowrap;   /* 줄 수 고정 → iframe 높이 계산과 일치 */
 }
 
 /* ---------- CTA ---------- */
@@ -214,7 +215,7 @@ img { display: block; }
   .hero          { padding-top: 56px; }
   .hero__box     { gap: 32px; }
   .hero__content { gap: 4px; }
-  .hero__title   { font-size: clamp(44px, 5.4vw, 64px); }
+  .hero__title   { font-size: 5.4vw; }
   .hero__desc    { font-size: 16px; }
   .hero__cta     { gap: 12px; }
   .btn           { width: 140px; height: 48px; font-size: 15px; border-radius: 8px; }
@@ -231,10 +232,10 @@ img { display: block; }
   .mo-only { display: inline; }
 
   .hero          { padding-top: calc(100 * var(--m)); }
-  .hero__box     { gap: calc(34 * var(--m)); padding: 0 max(16px, calc(60 * var(--m))); }
+  .hero__box     { gap: calc(34 * var(--m)); padding: 0 calc(60 * var(--m)); }
   .hero__content { gap: 0; }
-  .hero__title   { font-size: max(32px, calc(100 * var(--m))); }
-  .hero__desc    { font-size: max(13px, calc(34 * var(--m))); }
+  .hero__title   { font-size: calc(100 * var(--m)); }
+  .hero__desc    { font-size: calc(34 * var(--m)); }
 
   .hero__cta { gap: calc(12 * var(--m)); }
   .btn {
@@ -257,6 +258,9 @@ img { display: block; }
   }
   .hero__stage-mo img { width: 100%; height: auto; aspect-ratio: 694 / 288; }
 }
+
+/* ---------- iframe으로 삽입됐을 때 (라이브클래스 등) ---------- */
+html.is-embed, html.is-embed body { overflow: hidden; background: var(--background-canvas); }
 
 /* ---------- 모션 최소화 설정 존중 ---------- */
 @media (prefers-reduced-motion: reduce) {

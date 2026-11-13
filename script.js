@@ -1,4 +1,7 @@
 (() => {
+  // iframe 안에 삽입된 경우 스크롤바가 생기지 않도록 표시
+  if (window.self !== window.top) document.documentElement.classList.add('is-embed');
+
   const hero = document.getElementById('hero');
   if (!hero) return;
 
