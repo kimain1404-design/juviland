@@ -1,0 +1,266 @@
+/* =========================================================
+   쥬비랜드 section01
+   PC     ≥ 1200px  : 1600 시안을 화면 폭에 맞춰 통째로 비율 축소
+   Tablet 768~1199  : 글자는 고정 크기, 일러스트는 버튼 아래로
+   Mobile ≤ 767px   : 1080 시안 비율 (540px에서 상한)
+   ========================================================= */
+
+/* 원주체 : fonts/ 폴더에 파일을 넣으면 적용, 없으면 Pretendard로 표시 */
+@font-face {
+  font-family: "Wonju";
+  font-weight: 700;
+  font-display: swap;
+  src: local("Wonju TTF Bold"), local("WonjuTTF-Bold"),
+       url("./fonts/Wonju-Bold.woff2") format("woff2");
+}
+
+:root {
+  --background-canvas: #f8f4e9;
+  --background-surface: #ffffff;
+  --text-primary: #1f1f1f;
+  --text-secondary: #545454;
+  --text-inverse: #ffffff;
+  --text-brand: #082548;
+  --brand-primary: #082548;
+  --brand-primary-hover: #0d3466;
+  --stroke-strong: #000000;
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+
+  /* 1600 시안의 1px → 화면 px */
+  --u: min(100vw / 1600, 1px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: var(--text-primary);
+  background: var(--background-canvas);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; }
+
+.mo-only { display: none; }
+
+/* ---------- Section ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: calc(80 * var(--u));
+  background: var(--background-canvas);
+  isolation: isolate;
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* ---------- Text ---------- */
+.hero__box {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(40 * var(--u));
+  width: 100%;
+  padding: 0 24px;
+}
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4 * var(--u));
+  text-align: center;
+}
+.hero__title {
+  margin: 0;
+  font-family: "Wonju", "Pretendard", sans-serif;
+  font-weight: 700;
+  font-size: calc(80 * var(--u));
+  line-height: 1.2;
+  word-break: keep-all;
+}
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: .08em;   /* 받침 잘림 방지 */
+  margin-bottom: -.08em;
+}
+.line__inner { display: inline-block; }
+
+.hero__desc {
+  margin: 0;
+  font-size: max(13px, calc(18 * var(--u)));
+  line-height: 1.6;
+  letter-spacing: -0.04em;
+  color: var(--text-secondary);
+  word-break: keep-all;
+}
+
+/* ---------- CTA ---------- */
+.hero__cta {
+  display: flex;
+  justify-content: center;
+  gap: calc(12 * var(--u));
+}
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(150 * var(--u));
+  height: calc(52 * var(--u));
+  padding: 0;
+  border: 1px solid var(--stroke-strong);
+  border-radius: calc(8 * var(--u));
+  font-size: max(12px, calc(16 * var(--u)));
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: translate .25s var(--ease-out), box-shadow .25s var(--ease-out), background-color .25s;
+}
+.btn--primary   { background: var(--brand-primary); color: var(--text-inverse); }
+.btn--secondary { background: var(--background-surface); color: var(--text-brand); }
+.btn:hover  { translate: 0 -2px; box-shadow: 0 3px 0 var(--stroke-strong); }
+.btn:active { translate: 0 0; box-shadow: none; }
+.btn--primary:hover { background: var(--brand-primary-hover); }
+.btn:focus-visible { outline: 3px solid #f2b705; outline-offset: 3px; }
+
+/* ---------- 일러스트 (섹션 y 382 ~ 742) ---------- */
+.hero__stage {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: calc(1600 * var(--u));
+  height: calc(360 * var(--u));
+  margin-top: calc(-44 * var(--u));
+}
+.hero__people {
+  position: absolute;
+  left: calc(467 * var(--u));
+  top: calc(72 * var(--u));
+  width: calc(694 * var(--u));
+  height: calc(288 * var(--u));
+}
+.hero__scene {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(1520 * var(--u));
+  height: calc(360 * var(--u));
+}
+.hero__people img,
+.hero__scene img { width: 100%; height: 100%; }
+
+/* 1600px보다 넓은 화면 : 왼쪽 언덕을 화면 끝까지 이어 줌 (언덕 맨 왼쪽 1px 세로줄을 늘림) */
+.hero__scene::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 50vw;
+  height: 100%;
+  background: url("./assets/scene-edge.png") 0 0 / 100% 100% no-repeat;
+}
+
+.hero__stage-mo { display: none; }
+
+/* =========================================================
+   Motion
+   js-ready : JS가 켜졌을 때만 초기 숨김 (JS 없으면 그대로 노출)
+   is-in    : 섹션이 화면에 들어오면 재생
+   ========================================================= */
+@keyframes bg-in   { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+@keyframes line-up { from { transform: translateY(110%); } to { transform: none; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes rise    { from { opacity: 0; transform: translateY(12%); } to { opacity: 1; transform: none; } }
+/* 인물 위아래 반복 : 아래로만 내려가 하단 빈틈이 생기지 않음 */
+@keyframes bob     { 0%, 100% { translate: 0 0; } 50% { translate: 0 3%; } }
+
+.hero.js-ready .hero__bg,
+.hero.js-ready .hero__desc,
+.hero.js-ready .btn,
+.hero.js-ready .people-motion { opacity: 0; }
+.hero.js-ready .line__inner { transform: translateY(110%); }
+
+.hero.is-in .hero__bg                       { animation: bg-in 1.2s var(--ease-out) both; }
+.hero.is-in .line__inner                    { animation: line-up .9s var(--ease-out) both; }
+.hero.is-in .line:nth-child(1) .line__inner { animation-delay: .15s; }
+.hero.is-in .line:nth-child(2) .line__inner { animation-delay: .27s; }
+.hero.is-in .hero__desc                     { animation: fade-up .8s var(--ease-out) .55s both; }
+.hero.is-in .btn                            { animation: fade-up .7s var(--ease-out) .7s both; }
+.hero.is-in .btn--secondary                 { animation-delay: .8s; }
+.hero.is-in .people-motion                  { animation: rise 1.2s var(--ease-out) .85s both; }
+.hero.is-in .people-motion img              { animation: bob 3s ease-in-out 2.1s infinite; }
+
+/* =========================================================
+   Tablet 768 ~ 1199
+   ========================================================= */
+@media (max-width: 1199px) {
+  .hero          { padding-top: 56px; }
+  .hero__box     { gap: 32px; }
+  .hero__content { gap: 4px; }
+  .hero__title   { font-size: clamp(44px, 5.4vw, 64px); }
+  .hero__desc    { font-size: 16px; }
+  .hero__cta     { gap: 12px; }
+  .btn           { width: 140px; height: 48px; font-size: 15px; border-radius: 8px; }
+  .hero__stage   { margin-top: 20px; }   /* 곡선이 버튼과 겹치지 않도록 */
+}
+
+/* =========================================================
+   Mobile ≤ 767  (1080 시안 → 화면 폭 비례, 540px에서 상한)
+   ========================================================= */
+@media (max-width: 767px) {
+  :root { --m: min(100vw / 1080, .5px); }
+
+  .pc-only { display: none; }
+  .mo-only { display: inline; }
+
+  .hero          { padding-top: calc(100 * var(--m)); }
+  .hero__box     { gap: calc(34 * var(--m)); padding: 0 max(16px, calc(60 * var(--m))); }
+  .hero__content { gap: 0; }
+  .hero__title   { font-size: max(32px, calc(100 * var(--m))); }
+  .hero__desc    { font-size: max(13px, calc(34 * var(--m))); }
+
+  .hero__cta { gap: calc(12 * var(--m)); }
+  .btn {
+    width: calc(232 * var(--m));
+    height: calc(78 * var(--m));
+    font-size: calc(26 * var(--m));
+    border-radius: max(4px, calc(8 * var(--m)));
+  }
+  /* 보이는 크기는 시안대로, 누르는 영역만 위아래로 확장 */
+  .btn::after { content: ""; position: absolute; inset: -8px 0; }
+
+  .hero__stage { display: none; }
+  .hero__stage-mo {
+    display: block;
+    position: relative;
+    flex-shrink: 0;
+    left: calc(6 * var(--m));
+    width: calc(996 * var(--m));
+    margin-top: calc(52 * var(--m));   /* 하단을 섹션 끝에 맞춤 */
+  }
+  .hero__stage-mo img { width: 100%; height: auto; aspect-ratio: 694 / 288; }
+}
+
+/* ---------- 모션 최소화 설정 존중 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero, .hero * { animation: none !important; transition: none !important; }
+  .hero .people-motion, .hero .btn, .hero .hero__desc, .hero .hero__bg { opacity: 1 !important; }
+  .hero .line__inner { transform: none !important; }
+}
