@@ -1,0 +1,213 @@
+/* =========================================================
+   쥬비랜드 qa-section02 – 문의 바로가기 카드
+   qa-section02(pc)  ≥ 1200px : 1600 시안을 화면 폭에 맞춰 비율 축소, 3열
+   qa-section02(mob) ≤ 1199px : 1080 시안 비율, 세로 3줄
+                                 (태블릿은 글자 크기를 648px 화면 기준에서 고정, 카드는 화면 폭을 채움)
+   ========================================================= */
+
+:root {
+  --bg-subtle: #f8f8f8;
+  --surface: #ffffff;
+  --text-primary: #1f1f1f;
+  --text-muted: #6e6e6e;
+  --stroke: #dedede;
+  --brand-primary: #082548;
+  --tile-base: #f8f4e9;
+  --tile-warm: #f5d9c4;
+  --tile-nature: #a9cd87;
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-back: cubic-bezier(.34, 1.56, .64, 1);
+
+  /* 1600 시안 1px → 화면 px */
+  --u: min(100vw / 1600, 1px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; }
+
+/* ---------- Section ---------- */
+.qa { background: var(--bg-subtle); overflow: hidden; }
+.qa__inner {
+  width: calc(1600 * var(--u));
+  margin: 0 auto;
+  padding: calc(28 * var(--u)) calc(200 * var(--u));
+  display: flex;
+  gap: calc(20 * var(--u));
+}
+
+/* ---------- Shortcut card (pc) ---------- */
+.sc {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: calc(200 * var(--u));
+  padding: calc(28 * var(--u));
+  border: max(1px, calc(1 * var(--u))) solid var(--stroke);
+  border-radius: calc(16 * var(--u));
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  row-gap: calc(28 * var(--u));
+  white-space: nowrap;
+  transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s;
+}
+.sc__tile {
+  grid-column: 1; grid-row: 1;
+  width: calc(56 * var(--u));
+  height: calc(56 * var(--u));
+  border-radius: calc(16 * var(--u));
+  display: grid;
+  place-items: center;
+  transition: transform .45s var(--ease-back);
+}
+.sc__tile img { width: calc(29.6 * var(--u)); height: auto; }
+.sc__tile--base   { background: var(--tile-base); }
+.sc__tile--warm   { background: var(--tile-warm); }
+.sc__tile--nature { background: var(--tile-nature); }
+
+.sc__arrow {
+  grid-column: 2; grid-row: 1;
+  width: calc(40 * var(--u));
+  height: calc(40 * var(--u));
+  border: max(1px, calc(1 * var(--u))) solid var(--stroke);
+  border-radius: 999px;
+  background: var(--surface);
+  color: #8c8c8c;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  transition: background-color .3s, border-color .3s, color .3s;
+}
+.sc__arrow i {
+  display: block;
+  width: calc(21.2 * var(--u));
+  height: calc(21.2 * var(--u));
+  background: currentColor;
+  -webkit-mask: url("./assets/qa-section02-icon-arrow.png") center / contain no-repeat;
+          mask: url("./assets/qa-section02-icon-arrow.png") center / contain no-repeat;
+  transition: transform .35s var(--ease-out);
+}
+.sc__text {
+  grid-column: 1 / -1; grid-row: 2;
+  align-self: end;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--u));
+}
+.sc__title {
+  font-size: calc(23 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sc__desc {
+  font-size: calc(16 * var(--u));
+  line-height: 1.5;
+  letter-spacing: -0.04em;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sc--en .sc__title,
+.sc--en .sc__desc { letter-spacing: -0.02em; }
+
+/* ---------- 상호작용 : 마우스를 올리면 카드가 떠오르고 화살표가 남색으로 ---------- */
+@media (hover: hover) {
+  .sc:hover {
+    transform: translateY(-4px);
+    border-color: #c9c9c9;
+    box-shadow: 0 12px 28px -14px rgba(8, 37, 72, .25);
+  }
+  .sc:hover .sc__tile { transform: scale(1.06) rotate(-3deg); }
+  .sc:hover .sc__arrow { background: var(--brand-primary); border-color: var(--brand-primary); color: #fff; }
+  .sc:hover .sc__arrow i { animation: arrow-out .5s var(--ease-out); }
+}
+@keyframes arrow-out {
+  0%   { transform: none; }
+  45%  { transform: translate(120%, -120%); }
+  46%  { transform: translate(-120%, 120%); }
+  100% { transform: none; }
+}
+.sc:active { transform: scale(.985); }
+.sc:focus-visible { outline: 3px solid #f2b705; outline-offset: 3px; }
+
+/* =========================================================
+   Motion – 화면에 들어오면 카드가 차례로 올라오고,
+   글자가 떠오른 뒤 화살표가 들어옴 (아이콘은 카드와 함께 움직임)
+   ========================================================= */
+.js-ready .sc:not(.is-in) { opacity: 0; transform: translateY(32px); }
+.sc.is-in { transition: opacity .7s var(--ease-out), transform .9s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s; }
+.js-ready .sc:not(.is-in) .sc__arrow { opacity: 0; transform: translate(-10px, 10px); }
+.sc.is-in .sc__arrow { transition: opacity .5s var(--ease-out) .4s, transform .5s var(--ease-out) .4s, background-color .3s, border-color .3s, color .3s; }
+.js-ready .sc:not(.is-in) .sc__text > * { opacity: 0; transform: translateY(8px); }
+.sc.is-in .sc__text > * { transition: opacity .6s var(--ease-out) .25s, transform .6s var(--ease-out) .25s; }
+.sc.is-in .sc__desc { transition-delay: .35s; }
+/* 등장이 끝나면 마우스 반응은 다시 빠르게 */
+.sc.is-done { transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s; }
+.sc.is-done .sc__tile { transition: transform .45s var(--ease-back); }
+.sc.is-done .sc__arrow { transition: background-color .3s, border-color .3s, color .3s; }
+
+/* =========================================================
+   qa-section02(mob) ≤ 1199px
+   ========================================================= */
+@media (max-width: 1199px) {
+  :root { --m: min(100vw / 1080, .6px); }
+
+  .qa__inner {
+    width: 100%;
+    padding: calc(60 * var(--m)) calc(100vw * 60 / 1080);   /* 좌우 여백 = 모바일 시안 비율 */
+    flex-direction: column;
+    gap: calc(32 * var(--m));
+  }
+  .sc {
+    flex: none;
+    height: auto;
+    padding: calc(28 * var(--m));
+    border-radius: calc(28 * var(--m));
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    column-gap: calc(28 * var(--m));
+    row-gap: 0;
+    align-items: center;
+  }
+  .sc__tile {
+    width: calc(140 * var(--m));
+    height: calc(140 * var(--m));
+    border-radius: calc(28 * var(--m));
+  }
+  .sc__tile img { width: calc(74 * var(--m)); }
+  .sc__text { grid-column: 2; grid-row: 1; align-self: center; }
+  .sc__title { font-size: calc(42 * var(--m)); }
+  .sc__desc { font-size: calc(34 * var(--m)); line-height: 1.4; }
+  .sc__arrow {
+    grid-column: 3; grid-row: 1;
+    align-self: start;
+    width: calc(68 * var(--m));
+    height: calc(68 * var(--m));
+    border-width: max(1px, calc(1.7 * var(--m)));
+  }
+  .sc__arrow i { width: calc(36 * var(--m)); height: calc(36 * var(--m)); }
+  .js-ready .sc:not(.is-in) { transform: translateY(24px); }
+}
+
+/* ---------- iframe으로 삽입됐을 때 ---------- */
+html.is-embed, html.is-embed body { overflow: hidden; }
+
+/* ---------- 모션 최소화 설정 존중 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .qa *, .qa *::before, .qa *::after { transition: none !important; animation: none !important; }
+  .sc:hover { transform: none; }
+}
