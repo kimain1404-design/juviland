@@ -1,0 +1,385 @@
+/* =========================================================
+   쥬비랜드 main-section06 – OUR PEOPLE
+   main-section06(pc)  ≥ 1200px : 1600 시안을 화면 폭에 맞춰 비율 축소
+   main-section06(mob) ≤ 1199px : 1080 시안 비율
+                                   (태블릿은 글자 크기를 648px 화면 기준에서 고정, 콘텐츠는 화면 폭을 채움)
+   ========================================================= */
+
+@font-face {
+  font-family: "Wonju";
+  font-weight: 700;
+  font-display: swap;
+  src: local("Wonju TTF Bold"), local("WonjuTTF-Bold"), url("../main-section01/fonts/Wonju-Bold.woff2") format("woff2");
+}
+
+:root {
+  --bg-base: #f8f4e9;
+  --bg-sand: #e9dcb9;
+  --surface: #ffffff;
+  --text-primary: #1f1f1f;
+  --text-secondary: #545454;
+  --text-on-brand: #f8f4e9;
+  --brand-primary: #082548;
+  --brand-accent: #b4633b;
+  --stroke-subtle: #dedede;
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+
+  /* 1600 시안 1px → 화면 px */
+  --u: min(100vw / 1600, 1px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; }
+.mo-only { display: none; }
+
+/* ---------- Section ---------- */
+.ppl { position: relative; background: var(--bg-base); overflow: hidden; }
+.ppl__inner {
+  width: calc(1600 * var(--u));
+  margin: 0 auto;
+  padding: calc(80 * var(--u)) calc(200 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(60 * var(--u));
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Header ---------- */
+.ppl__head { display: flex; flex-direction: column; gap: calc(32 * var(--u)); }
+.ppl__eyebrow {
+  margin: 0;
+  font-size: calc(12 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--brand-primary);
+}
+.ppl__titles { display: flex; flex-direction: column; gap: calc(6 * var(--u)); }
+.ppl__title {
+  margin: 0;
+  font-size: calc(36 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+}
+.ppl__sub {
+  margin: 0;
+  font-size: calc(20 * var(--u));
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  color: var(--text-secondary);
+}
+.line { display: inline-block; max-width: 100%; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.line__in { display: inline-block; }
+
+/* 세로 구분선 ( 대표 | 송주비 ) */
+.bar {
+  display: inline-block;
+  flex-shrink: 0;
+  width: max(1px, calc(1 * var(--u)));
+  height: calc(18 * var(--u));
+  background: currentColor;
+  opacity: .9;
+}
+
+/* ---------- Founder ---------- */
+.founder { display: flex; flex-direction: column; }
+.founder__head {
+  position: relative;
+  overflow: hidden;
+  padding: calc(54 * var(--u)) calc(60 * var(--u)) calc(40 * var(--u));
+  border-radius: calc(16 * var(--u)) calc(16 * var(--u)) 0 0;
+  background: var(--brand-accent);
+  color: var(--text-on-brand);
+}
+/* 사진 : (pc) 카드 전체에 깔림 – 이미지 왼쪽이 투명하게 사라져 주황 배경과 섞임 */
+.founder__photo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.founder__photo-in { position: absolute; inset: 0; }
+.founder__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% 50%;
+}
+.founder__intro { position: relative; display: flex; flex-direction: column; }
+.founder__name {
+  margin: 0 0 calc(14 * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  font-size: calc(20 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+}
+.founder__quote {
+  margin: 0 0 calc(10 * var(--u));
+  font-family: "Wonju", "Pretendard", sans-serif;
+  font-size: calc(34 * var(--u));
+  font-weight: 700;
+  line-height: 1.4;
+}
+.founder__bio { display: flex; flex-direction: column; gap: calc(10 * var(--u)); }
+.founder__bio p {
+  margin: 0;
+  font-size: calc(18 * var(--u));
+  line-height: 1.4;
+  color: var(--bg-base);
+}
+
+/* ---------- Credentials (pc : 모래색 바탕 위 2×2 카드) ---------- */
+.cred {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(10 * var(--u));
+  padding: calc(20 * var(--u));
+  border-radius: 0 0 calc(16 * var(--u)) calc(16 * var(--u));
+  background: var(--bg-sand);
+}
+.cred__item {
+  min-height: calc(224 * var(--u));
+  padding: calc(28 * var(--u));
+  border: max(1px, calc(1 * var(--u))) solid var(--stroke-subtle);
+  border-radius: calc(12 * var(--u));
+  background: var(--surface);
+  overflow: hidden;
+}
+.cred__title {
+  margin: 0 0 calc(14 * var(--u));
+  font-size: calc(24 * var(--u));
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.04em;
+}
+.dots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 * var(--u));
+  font-size: calc(16 * var(--u));
+  line-height: 1.65;
+  letter-spacing: -0.04em;
+  color: var(--text-secondary);
+}
+.dots li::before { content: "· "; }
+
+/* ---------- Experts ---------- */
+.experts {
+  display: flex;
+  flex-direction: column;
+  gap: calc(20 * var(--u));
+  padding: calc(20 * var(--u));
+  border-radius: calc(16 * var(--u));
+  background: var(--bg-sand);
+}
+.experts__title {
+  margin: 0;
+  font-size: calc(20 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+}
+.experts__row { display: flex; gap: calc(10 * var(--u)); }
+.expert {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: calc(28 * var(--u));
+  border: max(1px, calc(1 * var(--u))) solid var(--stroke-subtle);
+  border-radius: calc(12 * var(--u));
+  background: var(--surface);
+  overflow: hidden;
+}
+.brk { display: none; }
+.expert__name {
+  margin: 0 0 calc(14 * var(--u));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  font-size: calc(20 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+/* =========================================================
+   Motion – 화면에 들어오면 순서대로
+   머리말 → 대표 카드(사진이 걷히며 등장 → 이름 → 문장 → 소개)
+   → 이력 카드 4장 → 함께하는 전문가
+   ========================================================= */
+/* 머리말 */
+.js-ready .ppl__eyebrow { opacity: 0; transform: translateY(-8px); }
+.js-ready .ppl__title .line__in { transform: translateY(110%); }
+.js-ready .ppl__sub { opacity: 0; transform: translateY(12px); }
+.ppl__head.is-in .ppl__eyebrow { opacity: 1; transform: none; transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+.ppl__head.is-in .ppl__title .line__in { transform: none; transition: transform .9s var(--ease-out) .1s; }
+.ppl__head.is-in .ppl__sub { opacity: 1; transform: none; transition: opacity .8s var(--ease-out) .35s, transform .8s var(--ease-out) .35s; }
+
+/* 대표 카드 */
+.js-ready .founder__head { opacity: 0; transform: translateY(40px); }
+.founder__head.is-in { opacity: 1; transform: none; transition: opacity .8s var(--ease-out), transform 1s var(--ease-out); }
+.js-ready .founder__photo { clip-path: inset(0 0 0 100%); }
+.founder__head.is-in .founder__photo { clip-path: inset(0 0 0 0); transition: clip-path 1.2s cubic-bezier(.65, 0, .35, 1) .25s; }
+.js-ready .founder__photo-in { transform: scale(1.12); }
+.founder__head.is-in .founder__photo-in { transform: none; transition: transform 2.4s var(--ease-out) .25s; }
+.js-ready .founder__name { opacity: 0; transform: translateY(10px); }
+.founder__head.is-in .founder__name { opacity: 1; transform: none; transition: opacity .7s var(--ease-out) .45s, transform .7s var(--ease-out) .45s; }
+.js-ready .founder__quote .line__in { transform: translateY(110%); }
+.founder__head.is-in .founder__quote .line__in { transform: none; transition: transform 1s var(--ease-out) .6s; }
+.founder__head.is-in .founder__quote .line:nth-child(2) .line__in { transition-delay: .72s; }
+.js-ready .founder__bio p { opacity: 0; transform: translateY(12px); }
+.founder__head.is-in .founder__bio p { opacity: 1; transform: none; transition: opacity .8s var(--ease-out) .95s, transform .8s var(--ease-out) .95s; }
+.founder__head.is-in .founder__bio p:nth-child(2) { transition-delay: 1.1s; }
+
+/* 이력 카드 · 전문가 */
+.js-ready .cred__item,
+.js-ready .experts { opacity: 0; transform: translateY(32px); }
+.cred__item.is-in,
+.experts.is-in { opacity: 1; transform: none; transition: opacity .7s var(--ease-out), transform .9s var(--ease-out); }
+/* 카드 안 항목이 한 줄씩 */
+.js-ready .cred__item li,
+.js-ready .expert li { opacity: 0; transform: translateX(-8px); }
+.cred__item.is-in li,
+.experts.is-in .expert li { opacity: 1; transform: none; transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }
+.cred__item.is-in li:nth-child(1), .experts.is-in .expert li:nth-child(1) { transition-delay: .25s; }
+.cred__item.is-in li:nth-child(2), .experts.is-in .expert li:nth-child(2) { transition-delay: .33s; }
+.cred__item.is-in li:nth-child(3), .experts.is-in .expert li:nth-child(3) { transition-delay: .41s; }
+.cred__item.is-in li:nth-child(4), .experts.is-in .expert li:nth-child(4) { transition-delay: .49s; }
+/* 전문가 카드 2장은 좌우에서 */
+.js-ready .expert { opacity: 0; }
+.js-ready .expert:nth-child(1) { transform: translateX(-24px); }
+.js-ready .expert:nth-child(2) { transform: translateX(24px); }
+.experts.is-in .expert { opacity: 1; transform: none; transition: opacity .7s var(--ease-out) .15s, transform .9s var(--ease-out) .15s; }
+.experts.is-in .expert:nth-child(2) { transition-delay: .27s; }
+
+/* =========================================================
+   main-section06(mob) ≤ 1199px
+   ========================================================= */
+@media (max-width: 1199px) {
+  :root { --m: min(100vw / 1080, .6px); }
+
+  .pc-only { display: none; }
+  .mo-only { display: inline; }
+  img.mo-only { display: block; }
+  .line { display: block; }
+
+  .ppl__inner {
+    white-space: nowrap;   /* 줄바꿈을 모바일 시안과 똑같이 고정 → 섹션 높이가 화면 폭에 정비례 */
+    width: 100%;
+    padding: calc(120 * var(--m)) calc(100vw * 60 / 1080);   /* 좌우 여백 = 모바일 시안 비율 */
+    gap: calc(80 * var(--m));
+  }
+  .ppl__head { gap: calc(30 * var(--m)); }
+  .ppl__eyebrow { font-size: calc(34 * var(--m)); line-height: 1.5; }
+  .ppl__titles { gap: calc(16 * var(--m)); }
+  .ppl__title { font-size: calc(68 * var(--m)); }
+  .ppl__sub { font-size: calc(34 * var(--m)); line-height: 1.6; }
+
+  .bar { width: max(1.5px, calc(3 * var(--m))); height: calc(42 * var(--m)); opacity: 1; }
+
+  /* 대표 : 주황 카드 한 장 안에 사진 → 소개 → 이력 */
+  .founder {
+    padding-bottom: calc(40 * var(--m));
+    border-radius: calc(36 * var(--m));
+    background: var(--brand-accent);
+    overflow: hidden;
+  }
+  .founder__head {
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    text-align: center;
+  }
+  .founder__photo {
+    position: relative;
+    width: 100%;
+    height: min(100vw * 553 / 1080, 460px);
+  }
+  .founder__photo img { object-position: 50% 30%; }
+  .founder__intro {
+    align-items: center;
+    padding: calc(60 * var(--m)) calc(40 * var(--m)) 0;
+  }
+  .founder__name {
+    margin-bottom: calc(42 * var(--m));
+    gap: calc(24 * var(--m));
+    font-size: calc(48 * var(--m));
+    letter-spacing: -0.04em;
+  }
+  .founder__quote { margin-bottom: calc(42 * var(--m)); font-size: calc(58 * var(--m)); }
+  .founder__bio { gap: calc(24 * var(--m)); }
+  .founder__bio p { font-size: calc(34 * var(--m)); line-height: 1.6; letter-spacing: -0.04em; }
+
+  .cred {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: calc(60 * var(--m)) calc(40 * var(--m)) 0;
+    padding: calc(52 * var(--m));
+    border: max(1px, calc(3 * var(--m))) solid var(--stroke-subtle);
+    border-radius: calc(32 * var(--m));
+    background: var(--surface);
+  }
+  .cred__item {
+    min-height: 0;
+    padding: calc(36 * var(--m)) 0;
+    border: 0;
+    border-top: max(1px, calc(2 * var(--m))) solid var(--stroke-subtle);
+    border-radius: 0;
+    background: none;
+    overflow: visible;
+  }
+  .cred__item:first-child { padding-top: 0; border-top: 0; }
+  .cred__item:last-child { padding-bottom: 0; }
+  .cred__title { margin-bottom: calc(14 * var(--m)); font-size: calc(48 * var(--m)); line-height: 1.4; }
+  .cred .dots { gap: calc(14 * var(--m)); font-size: calc(34 * var(--m)); line-height: 1.4; }
+
+  .experts {
+    align-items: center;
+    gap: calc(36 * var(--m));
+    padding: calc(60 * var(--m)) calc(40 * var(--m)) calc(40 * var(--m));
+    border-radius: calc(36 * var(--m));
+  }
+  .experts__title { font-size: calc(56 * var(--m)); }
+  .experts__row { width: 100%; flex-direction: column; gap: calc(20 * var(--m)); }
+  .expert {
+    flex: none;   /* 세로 배치에서 내용보다 작아지지 않게 */
+    padding: calc(52 * var(--m));
+    border-width: max(1px, calc(3 * var(--m)));
+    border-radius: calc(32 * var(--m));
+  }
+  .expert__name {
+    margin-bottom: calc(20 * var(--m));
+    gap: calc(8 * var(--m)) calc(24 * var(--m));
+    font-size: calc(50 * var(--m));
+    letter-spacing: -0.04em;
+  }
+  .expert .bar { height: calc(40 * var(--m)); background: var(--text-primary); }
+  .expert .brk { display: block; flex-basis: 100%; height: 0; }   /* 시안처럼 이름을 다음 줄로 */
+  .expert .dots { gap: calc(14 * var(--m)); font-size: calc(42 * var(--m)); line-height: 1.4; }
+
+  /* 모바일 모션 : 사진은 위에서 아래로 걷힘, 이력은 카드 안에서 한 줄씩 */
+  .js-ready .founder__photo { clip-path: inset(0 0 100% 0); }
+  .js-ready .cred__item:not(.is-in) { transform: translateY(20px); }          /* 나타나면 반드시 제자리로 */
+  .js-ready .experts:not(.is-in) .expert { transform: translateY(20px); }
+}
+
+/* ---------- iframe으로 삽입됐을 때 ---------- */
+html.is-embed, html.is-embed body { overflow: hidden; }
+
+/* ---------- 모션 최소화 설정 존중 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ppl *, .ppl *::before, .ppl *::after { transition: none !important; }
+}
