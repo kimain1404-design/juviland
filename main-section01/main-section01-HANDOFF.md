@@ -22,7 +22,7 @@
 - **주변 일러스트(Group 7, `main-section01(pc)-scene.webp`)**: 고정, 모션 없음.
 - **가운데 인물(`main-section01-people.webp`)**: 아래에서 올라오며 등장(0.85s 시작, 1.2s) → 2.1s부터 3초 주기로 위아래 반복. 위로 올리면 잘린 하단에 빈틈이 생겨서 시안 위치에서 **아래로만** 3% 내려갔다 돌아옴.
 - **텍스트·버튼**: 배경 줌아웃(1.2s) → 제목 1·2줄 밀려 올라옴(0.15s/0.27s) → 설명(0.55s) → 버튼(0.7s/0.8s).
-- **PC (1200px 이상)**: 텍스트·버튼·간격·일러스트를 1600 시안 비율로 함께 축소 → 버튼과 곡선 간격이 시안대로 유지. 1600px 이상은 원본 크기로 가운데 정렬, 왼쪽 언덕은 `main-section01(pc)-scene-edge.png`로 화면 끝까지 연장.
+- **PC (1200px 이상)**: 텍스트·버튼·간격·일러스트를 1600 시안 비율로 함께 축소 → 버튼과 곡선 간격이 시안대로 유지. 1600px 이상은 원본 크기로 가운데 정렬. 왼쪽 트랙터 언덕은 끝이 둥근 별도 그림(`main-section01(pc)-farm.webp`)이라 넓은 화면에서도 자연스럽게 마무리됨.
 - **태블릿 (768~1199px)**: 글자 고정 크기, 일러스트는 버튼 아래 20px부터.
 - **모바일 (767px 이하)**: 1080 시안 비율 그대로(540px에서 상한). 버튼도 시안 비율(232×78 → 390px에서 약 84×28)이고, 누르는 영역만 위아래 8px 확장. 최소 글자 크기 없음(iframe 높이 계산과 맞추기 위해).
 - **줄바꿈 고정**: 제목·설명에 `white-space: nowrap` → 줄 수가 바뀌지 않아 iframe 높이가 정확히 맞음.
@@ -44,7 +44,7 @@ main-section01/
 │  ├─ main-section01-bg.jpg                 수채화 배경 (pc·mob 공통)
 │  ├─ main-section01-people.webp            가운데 인물, 위아래 모션 (pc·mob 공통)
 │  ├─ main-section01(pc)-scene.webp         주변 일러스트, 고정 (pc 전용)
-│  └─ main-section01(pc)-scene-edge.png     1600px 이상에서 왼쪽 언덕 연장 (pc 전용)
+│  └─ main-section01(pc)-farm.webp          왼쪽 트랙터 언덕, 끝이 둥근 완성 그림 (pc 전용)
 └─ fonts/                            원주체 파일을 넣는 위치 (Wonju-Bold.woff2)
 ```
 
@@ -110,6 +110,10 @@ main-section01/
   <div class="hero__stage" aria-hidden="true">
     <div class="hero__people people-motion">
       <img src="./assets/main-section01-people.webp" alt="" width="694" height="288">
+    </div>
+    <!-- 왼쪽 트랙터 언덕 : 넓은 화면에서도 언덕 끝이 둥글게 마무리되도록 별도 그림 -->
+    <div class="hero__farm">
+      <img src="./assets/main-section01(pc)-farm.webp" alt="" width="662" height="252">
     </div>
     <div class="hero__scene">
       <img src="./assets/main-section01(pc)-scene.webp" alt="" width="1520" height="360">
@@ -296,19 +300,17 @@ img { display: block; }
   width: calc(1520 * var(--u));
   height: calc(360 * var(--u));
 }
-.hero__people img,
-.hero__scene img { width: 100%; height: 100%; }
-
-/* 1600px보다 넓은 화면 : 왼쪽 언덕을 화면 끝까지 이어 줌 (언덕 맨 왼쪽 1px 세로줄을 늘림) */
-.hero__scene::before {
-  content: "";
+.hero__farm {
   position: absolute;
-  top: 0;
-  right: 100%;
-  width: 50vw;
-  height: 100%;
-  background: url("./assets/main-section01(pc)-scene-edge.png") 0 0 / 100% 100% no-repeat;
+  left: calc(-33.03 * var(--u));     /* 언덕의 둥근 왼쪽 끝은 1600px보다 넓은 화면에서만 보임 */
+  top: calc(227.74 * var(--u));
+  width: calc(486.76 * var(--u));
+  height: calc(185.29 * var(--u));
 }
+.hero__people img,
+.hero__scene img,
+.hero__farm img { width: 100%; height: 100%; }
+
 
 .hero__stage-mo { display: none; }
 

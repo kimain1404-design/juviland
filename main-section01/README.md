@@ -16,7 +16,7 @@ main-section01/
 │  ├─ main-section01-bg.jpg                 수채화 배경 (pc·mob 공통)
 │  ├─ main-section01-people.webp            가운데 인물, 위아래 모션 (pc·mob 공통)
 │  ├─ main-section01(pc)-scene.webp         주변 일러스트, 고정 (pc 전용)
-│  └─ main-section01(pc)-scene-edge.png     1600px 이상에서 왼쪽 언덕 연장 (pc 전용)
+│  └─ main-section01(pc)-farm.webp          왼쪽 트랙터 언덕, 끝이 둥근 완성 그림 (pc 전용)
 └─ fonts/                            원주체 파일을 넣는 위치 (Wonju-Bold.woff2)
 ```
 

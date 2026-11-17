@@ -164,19 +164,17 @@ img { display: block; }
   width: calc(1520 * var(--u));
   height: calc(360 * var(--u));
 }
-.hero__people img,
-.hero__scene img { width: 100%; height: 100%; }
-
-/* 1600px보다 넓은 화면 : 왼쪽 언덕을 화면 끝까지 이어 줌 (언덕 맨 왼쪽 1px 세로줄을 늘림) */
-.hero__scene::before {
-  content: "";
+.hero__farm {
   position: absolute;
-  top: 0;
-  right: 100%;
-  width: 50vw;
-  height: 100%;
-  background: url("./assets/main-section01(pc)-scene-edge.png") 0 0 / 100% 100% no-repeat;
+  left: calc(-33.03 * var(--u));     /* 언덕의 둥근 왼쪽 끝은 1600px보다 넓은 화면에서만 보임 */
+  top: calc(227.74 * var(--u));
+  width: calc(486.76 * var(--u));
+  height: calc(185.29 * var(--u));
 }
+.hero__people img,
+.hero__scene img,
+.hero__farm img { width: 100%; height: 100%; }
+
 
 .hero__stage-mo { display: none; }
 
