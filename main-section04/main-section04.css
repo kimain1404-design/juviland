@@ -132,6 +132,7 @@ ol { padding: 0; list-style: none; }
   width: calc(20 * var(--u));
   height: max(1px, calc(1.5 * var(--u)));
   background: var(--brand-accent);
+  z-index: 2;   /* 트랙 카드 위로 : 점이 카드 테두리 위에 온전히 보이게 */
 }
 .link--1 { top: calc(84.8 * var(--u)); }
 .link--2 { top: calc(257.8 * var(--u)); }
