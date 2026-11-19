@@ -3,6 +3,7 @@
    main-section04(pc)  ≥ 1200px : 1600×512 시안을 화면 폭에 맞춰 비율 축소 (1600px 이상은 원본 크기)
    main-section04(mob) ≤ 1199px : 1080×1080 시안 비율 (태블릿은 648px 폭에서 상한, 콘텐츠는 화면 폭을 채움)
    섹션 높이를 시안 프레임 높이로 고정 → 라이브클래스 iframe 높이 식이 단순 (pc 32vw / mob 100vw)
+   모션 없음 : 화면 크기에만 반응하는 정적 레이아웃 (스크립트 없음)
    ========================================================= */
 
 :root {
@@ -23,7 +24,6 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; }
-html.is-embed, html.is-embed body { overflow: hidden; }
 body {
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   background: var(--brand-primary);
@@ -55,9 +55,6 @@ ol { padding: 0; list-style: none; }
   color: #fff;
   white-space: nowrap;
 }
-/* 줄 단위 마스크 (아래에서 밀려 올라옴) */
-.line { display: inline-block; max-width: 100%; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
-.line__in { display: inline-block; }
 
 .road__body {
   position: relative;
@@ -341,58 +338,4 @@ ol { padding: 0; list-style: none; }
     line-height: 1.35;
     letter-spacing: -0.02em;
   }
-}
-
-/* =========================================================
-   모션 (js-ready일 때만 – 스크립트가 없거나 '동작 줄이기' 설정이면 처음부터 보임)
-   섹션이 화면에 들어오면 .road.is-in → 각 요소가 --d 지연 후 순서대로 등장
-   ========================================================= */
-/* 트랙 안 단계 : 04 → 화살표 → 05 → 화살표 → 06 → 화살표 → 리더 (--t : 두 번째 트랙 시차) */
-.track__steps > li:nth-child(1) { --d: calc(2s + var(--t)); }
-.track__steps > li:nth-child(2) { --d: calc(2.15s + var(--t)); }
-.track__steps > li:nth-child(3) { --d: calc(2.25s + var(--t)); }
-.track__steps > li:nth-child(4) { --d: calc(2.4s + var(--t)); }
-.track__steps > li:nth-child(5) { --d: calc(2.5s + var(--t)); }
-.track__steps > li:nth-child(6) { --d: calc(2.65s + var(--t)); }
-.track__steps > li:nth-child(7) { --d: calc(2.75s + var(--t)); }
-.tleader .a--leaf { --d: calc(3.05s + var(--t)); }
-
-.js-ready .road__title .line__in { transform: translateY(110%); }
-.road.is-in .road__title .line__in { transform: none; transition: transform .9s var(--ease-out); }
-
-/* 기본 : 아래에서 떠오름 */
-.js-ready .a { opacity: 0; transform: translateY(16px); }
-.road.is-in .a {
-  opacity: 1;
-  transform: none;
-  transition: opacity .6s var(--ease-out) var(--d, 0s), transform .8s var(--ease-out) var(--d, 0s), clip-path .5s var(--ease-out) var(--d, 0s);
-}
-/* 트랙 카드 : pc는 왼쪽에서 / mob은 아래에서 */
-.js-ready .track.a { transform: translateX(-24px); }
-/* 화살표 : 왼쪽부터 그려짐 */
-.js-ready .a--clip-x { opacity: 1; transform: none; clip-path: inset(0 100% 0 0); }
-.road.is-in .a--clip-x { clip-path: inset(0 0 0 0); }
-/* 계단 화살표 : 아래(왼쪽)부터 위로 올라가 오른쪽으로 */
-.js-ready .a--clip-up { opacity: 1; transform: none; clip-path: inset(100% 100% 0 0); }
-.road.is-in .a--clip-up { clip-path: inset(0 0 0 0); transition: clip-path .5s cubic-bezier(.65, 0, .35, 1) var(--d); }
-/* 진로 선택 바 : pc는 위→아래 / mob은 왼쪽→오른쪽으로 펼쳐짐 */
-.js-ready .a--bar { opacity: 1; transform: none; clip-path: inset(0 0 100% 0); }
-.road.is-in .a--bar { clip-path: inset(0 0 0 0); transition: clip-path .6s cubic-bezier(.65, 0, .35, 1) var(--d); }
-/* 연결선 : 바에서 뻗어 나간 뒤 점이 톡 */
-.js-ready .a--link { opacity: 1; transform: scaleX(0); transform-origin: left center; }
-.road.is-in .a--link { transform: none; transition: transform .4s var(--ease-out) var(--d); }
-.js-ready .a--link .link__dot { transform: scale(0); }
-.road.is-in .a--link .link__dot { transform: none; transition: transform .45s var(--ease-back) calc(var(--d) + .3s); }
-/* 리더 상자 · 잎사귀 : 통통 튀며 등장 */
-.js-ready .a--pop { transform: scale(.7); }
-.road.is-in .a--pop { transition: opacity .4s var(--ease-out) var(--d), transform .6s var(--ease-back) var(--d); }
-.js-ready .a--leaf { transform: translateY(8px) scale(.4) rotate(-12deg); transform-origin: 50% 100%; }
-.road.is-in .a--leaf { transition: opacity .4s var(--ease-out) var(--d), transform .7s var(--ease-back) var(--d); }
-
-@media (max-width: 1199px) {
-  .js-ready .track.a { transform: translateY(24px); }
-  .js-ready .a--bar { clip-path: inset(0 100% 0 0); }
-  .js-ready .a--link { transform: scaleY(0); transform-origin: center top; }
-  .js-ready .track__title .track__leaf { opacity: 0; transform: scale(.4) rotate(-12deg); }
-  .road.is-in .track__title .track__leaf { opacity: 1; transform: none; transition: opacity .4s var(--ease-out) calc(3.05s + var(--t)), transform .7s var(--ease-back) calc(3.05s + var(--t)); }
 }
