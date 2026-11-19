@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>쥬비랜드 | 6단계 경력 로드맵</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="./main-section04.css">
+</head>
+<body>
+
+<!-- 화살표 (한 번 정의하고 재사용) : 19 × 11.547 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="r-arw-dash" viewBox="0 0 19 11.547">
+    <path d="M0 5.773H10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.5 2"/>
+    <path d="M9 0L19 5.773L9 11.547Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="r-arw-solid" viewBox="0 0 19 11.547">
+    <path d="M0 5.773H10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 0L19 5.773L9 11.547Z" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<section class="road" id="roadmap" aria-labelledby="road-title">
+  <div class="road__inner">
+
+    <h2 class="road__title" id="road-title"><span class="line"><span class="line__in">6단계 경력 로드맵</span></span></h2>
+
+    <div class="road__body">
+
+      <!-- 공통 단계 : main-section04(pc) 아래 → 위 계단 / main-section04(mob) 왼쪽 → 오른쪽 -->
+      <div class="stage">
+        <ol class="stage__steps">
+          <li class="step step--1 a" style="--d:.25s">
+            <p class="step__head"><span class="step__no">STEP 01</span><span class="step__name">진입</span></p>
+            <p class="step__desc">출국 전 교육</p>
+          </li>
+          <li class="stage__arw mo-only a a--clip-x" style="--d:.5s" aria-hidden="true"><svg><use href="#r-arw-dash"/></svg></li>
+          <li class="step step--2 a" style="--d:.6s">
+            <p class="step__head"><span class="step__no">STEP 02</span><span class="step__name">입국근로</span></p>
+            <p class="step__desc">K팜 캠퍼스 생활·적응</p>
+          </li>
+          <li class="stage__arw mo-only a a--clip-x" style="--d:.85s" aria-hidden="true"><svg><use href="#r-arw-dash"/></svg></li>
+          <li class="step step--3 a" style="--d:.95s">
+            <p class="step__head"><span class="step__no">STEP 03</span><span class="step__name">재입국근로</span></p>
+            <p class="step__desc">한국어 집중, 트랙 선택</p>
+          </li>
+        </ol>
+
+        <!-- pc 계단 화살표 (위로 올라갔다가 오른쪽으로) -->
+        <svg class="elbow elbow--1 pc-only a a--clip-up" style="--d:.5s" viewBox="0 0 37 54.77" aria-hidden="true">
+          <path d="M1 54.77V5.77H28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2.5"/>
+          <path d="M27 0L37 5.77L27 11.54Z" fill="currentColor"/>
+        </svg>
+        <svg class="elbow elbow--2 pc-only a a--clip-up" style="--d:.85s" viewBox="0 0 37 53.77" aria-hidden="true">
+          <path d="M1 53.77V5.77H28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2.5"/>
+          <path d="M27 0L37 5.77L27 11.54Z" fill="currentColor"/>
+        </svg>
+        <svg class="stage__out pc-only a a--clip-x" style="--d:1.2s" aria-hidden="true"><use href="#r-arw-dash"/></svg>
+
+        <p class="stage__choice a a--bar" style="--d:1.25s"><span>진로<br class="pc-only"><span class="mo-only"> </span>선택</span></p>
+      </div>
+
+      <!-- 진로 선택 → 두 트랙 연결선 -->
+      <span class="link link--1 a a--link" style="--d:1.6s" aria-hidden="true"><i class="link__dot"></i></span>
+      <span class="link link--2 a a--link" style="--d:1.7s" aria-hidden="true"><i class="link__dot"></i></span>
+
+      <!-- 두 갈래 : pc 위·아래 / mob 왼쪽·오른쪽 -->
+      <div class="tracks">
+        <article class="track a" style="--d:1.75s; --t:0s">
+          <h3 class="track__title">정착트랙<img class="track__leaf mo-only" src="./assets/main-section04-leaf.png" alt="" width="238" height="155"></h3>
+          <ol class="track__steps">
+            <li class="tstep a"><span class="tstep__no">STEP 04</span><span class="tstep__name">장기취업</span></li>
+            <li class="tarw a a--clip-x" aria-hidden="true"><svg><use href="#r-arw-dash"/></svg></li>
+            <li class="tstep a"><span class="tstep__no">STEP 05</span><span class="tstep__name">숙련기능</span></li>
+            <li class="tarw a a--clip-x" aria-hidden="true"><svg><use href="#r-arw-dash"/></svg></li>
+            <li class="tstep a"><span class="tstep__no">STEP 06</span><span class="tstep__name">정착리더</span></li>
+            <li class="tarw a a--clip-x" aria-hidden="true"><svg><use href="#r-arw-solid"/></svg></li>
+            <li class="tleader a a--pop"><img class="track__leaf pc-only a a--leaf" src="./assets/main-section04-leaf.png" alt="" width="238" height="155">한국 영농 리더</li>
+          </ol>
+        </article>
+
+        <article class="track a" style="--d:1.9s; --t:.15s">
+          <h3 class="track__title">귀환트랙<img class="track__leaf mo-only" src="./assets/main-section04-leaf.png" alt="" width="238" height="155"></h3>
+          <ol class="track__steps">
+            <li class="tstep a"><span class="tstep__no">STEP 04</span><span class="tstep__name">귀환준비</span></li>
+            <li class="tarw a a--clip-x" aria-hidden="true"><svg><use href="#r-arw-dash"/></svg></li>
+            <li class="tstep a"><span class="tstep__no">STEP 05</span><span class="tstep__name">현지정착</span></li>
+            <li class="tarw a a--clip-x" aria-hidden="true"><svg><use href="#r-arw-dash"/></svg></li>
+            <li class="tstep a"><span class="tstep__no">STEP 06</span><span class="tstep__name">거점리더</span></li>
+            <li class="tarw a a--clip-x" aria-hidden="true"><svg><use href="#r-arw-solid"/></svg></li>
+            <li class="tleader a a--pop"><img class="track__leaf pc-only a a--leaf" src="./assets/main-section04-leaf.png" alt="" width="238" height="155">고향 농업 리더</li>
+          </ol>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="./main-section04.js" defer></script>
+</body>
+</html>

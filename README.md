@@ -5,6 +5,7 @@ GitHub Pages: https://kimain1404-design.github.io/juviland/
 | 섹션 | 폴더 | 배포 주소 | 라이브클래스 코드 |
 |---|---|---|---|
 | main-section01 – 글로벌 농업 인재 경력패스 | `main-section01/` | https://kimain1404-design.github.io/juviland/main-section01/ | `main-section01/main-section01-liveklass.html` |
+| main-section04 – 6단계 경력 로드맵 | `main-section04/` | https://kimain1404-design.github.io/juviland/main-section04/ | `main-section04/main-section04-liveklass.html` |
 
 ## 이름 규칙
 

@@ -1,0 +1,398 @@
+/* =========================================================
+   쥬비랜드 main-section04 – 6단계 경력 로드맵
+   main-section04(pc)  ≥ 1200px : 1600×512 시안을 화면 폭에 맞춰 비율 축소 (1600px 이상은 원본 크기)
+   main-section04(mob) ≤ 1199px : 1080×1080 시안 비율 (태블릿은 648px 폭에서 상한, 콘텐츠는 화면 폭을 채움)
+   섹션 높이를 시안 프레임 높이로 고정 → 라이브클래스 iframe 높이 식이 단순 (pc 32vw / mob 100vw)
+   ========================================================= */
+
+:root {
+  --brand-primary: #082548;
+  --brand-accent: #b4633b;
+  --brand-secondary: #1e6b64;
+  --text-primary: #1f1f1f;
+  --text-secondary: #545454;
+  --muted: #f0f0f0;
+  --stroke: #c7c7c7;
+  --arrow: #000;
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-back: cubic-bezier(.34, 1.56, .64, 1);
+
+  /* 1600 시안 1px → 화면 px */
+  --u: min(100vw / 1600, 1px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+html.is-embed, html.is-embed body { overflow: hidden; }
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background: var(--brand-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; }
+p, h2, h3, ol { margin: 0; }
+ol { padding: 0; list-style: none; }
+.mo-only { display: none; }
+
+/* ---------- Section ---------- */
+.road { position: relative; background: var(--brand-primary); overflow: hidden; }
+.road__inner {
+  width: calc(1600 * var(--u));
+  height: calc(512 * var(--u));   /* 시안 프레임 높이 */
+  margin: 0 auto;
+  padding: 0 calc(200 * var(--u));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(20 * var(--u));
+}
+.road__title {
+  font-size: calc(32 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  color: #fff;
+  white-space: nowrap;
+}
+/* 줄 단위 마스크 (아래에서 밀려 올라옴) */
+.line { display: inline-block; max-width: 100%; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.line__in { display: inline-block; }
+
+.road__body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: calc(20 * var(--u));
+  height: calc(312 * var(--u));
+  white-space: nowrap;
+}
+
+/* ---------- 공통 단계 (pc : 아래에서 위로 계단) ---------- */
+.stage { position: relative; display: flex; height: 100%; flex-shrink: 0; }
+.stage__steps {
+  position: relative;
+  width: calc(497 * var(--u));
+  height: 100%;
+  padding: calc(24 * var(--u));
+  display: flex;
+  flex-direction: column-reverse;   /* STEP 01이 맨 아래 */
+  gap: calc(12 * var(--u));
+  background: #fff;
+  border: max(1px, calc(1 * var(--u))) solid var(--stroke);
+  border-right: 0;
+  border-radius: calc(16 * var(--u)) 0 0 calc(16 * var(--u));
+}
+.step {
+  width: calc(280 * var(--u));
+  height: calc(72 * var(--u));
+  padding: calc(14 * var(--u)) calc(16 * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--muted);
+  border-radius: calc(10 * var(--u));
+  line-height: 1.4;
+  text-align: center;
+}
+.step--1 { align-self: flex-start; }
+.step--2 { align-self: center; }
+.step--3 { align-self: flex-end; }
+.step__head { display: flex; align-items: center; gap: calc(4 * var(--u)); font-weight: 600; letter-spacing: -0.04em; }
+.step__no { font-size: calc(14 * var(--u)); color: var(--brand-primary); }
+.step__name { font-size: calc(16 * var(--u)); }
+.step__desc { font-size: calc(13 * var(--u)); letter-spacing: -0.04em; color: var(--text-secondary); }
+
+/* 계단 화살표 (시안 좌표, 흰 상자 기준) */
+.elbow, .stage__out { position: absolute; color: var(--arrow); overflow: visible; }
+.elbow--1 { left: calc(71 * var(--u)); top: calc(160.53 * var(--u)); width: calc(37 * var(--u)); height: calc(54.77 * var(--u)); }
+.elbow--2 { left: calc(154 * var(--u)); top: calc(76.53 * var(--u)); width: calc(37 * var(--u)); height: calc(53.77 * var(--u)); }
+.stage__out { left: calc(472 * var(--u)); top: calc(76.03 * var(--u)); width: calc(24 * var(--u)); height: calc(11.547 * var(--u)); }
+
+/* 진로 선택 */
+.stage__choice {
+  width: calc(74 * var(--u));
+  height: 100%;
+  padding: calc(12 * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-accent);
+  border-radius: 0 calc(10 * var(--u)) calc(10 * var(--u)) 0;
+  font-size: calc(22 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  text-align: center;
+  color: #fff;
+}
+
+/* 진로 선택 → 트랙 연결선 (끝에 점) */
+.link {
+  position: absolute;
+  left: calc(571 * var(--u));
+  width: calc(20 * var(--u));
+  height: max(1px, calc(1.5 * var(--u)));
+  background: var(--brand-accent);
+}
+.link--1 { top: calc(84.8 * var(--u)); }
+.link--2 { top: calc(257.8 * var(--u)); }
+.link__dot {
+  position: absolute;
+  right: calc(-5.33 * var(--u));
+  top: 50%;
+  width: calc(10.67 * var(--u));
+  height: calc(10.67 * var(--u));
+  margin-top: calc(-5.33 * var(--u));
+  border-radius: 50%;
+  background: var(--brand-accent);
+}
+
+/* ---------- 두 갈래 ---------- */
+.tracks {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(10 * var(--u));
+}
+.track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: calc(12 * var(--u));
+  padding: calc(20 * var(--u)) calc(24 * var(--u));
+  background: #fff;
+  border: max(1px, calc(1 * var(--u))) solid var(--stroke);
+  border-radius: calc(16 * var(--u));
+}
+.track__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(22 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+}
+.track__steps { display: flex; align-items: center; }
+.tstep {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: calc(12 * var(--u)) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--muted);
+  border-radius: calc(10 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+}
+.tstep__no { font-size: calc(14 * var(--u)); color: var(--brand-primary); }
+.tstep__name { font-size: calc(16 * var(--u)); }
+.tarw, .stage__arw { flex-shrink: 0; align-items: center; justify-content: center; color: var(--arrow); }
+.tarw { display: flex; }
+.tarw svg { width: calc(19 * var(--u)); height: calc(11.547 * var(--u)); display: block; }
+.tleader {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-secondary);
+  border-radius: calc(10 * var(--u));
+  font-size: calc(17 * var(--u));
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+/* 잎사귀 : pc는 리더 상자 위 / mob은 트랙 이름 옆 */
+.tleader .track__leaf {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 2.9 * var(--u));
+  width: calc(38.6 * var(--u));
+  height: calc(24.7 * var(--u));
+  margin-left: calc(-19.3 * var(--u));
+  object-fit: contain;
+}
+
+/* =========================================================
+   main-section04(mob) ≤ 1199px
+   ========================================================= */
+@media (max-width: 1199px) {
+  :root { --m: min(100vw / 1080, .6px); }
+
+  .pc-only { display: none; }
+  .mo-only { display: inline; }
+  img.mo-only, li.mo-only { display: flex; }
+
+  .road__inner {
+    width: 100%;
+    height: calc(1080 * var(--m));   /* 시안 프레임 높이 */
+    padding: 0 calc(100vw * 60 / 1080);   /* 좌우 여백 = 모바일 시안 비율 */
+    align-items: center;
+    gap: calc(32 * var(--m));
+  }
+  .road__title { font-size: calc(56 * var(--m)); }
+
+  .road__body {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: calc(40 * var(--m));
+  }
+
+  /* 공통 단계 : 흰 상자 안에 01 → 02 → 03 가로, 아래에 진로 선택 바 */
+  .stage { flex-direction: column; height: auto; }
+  .stage__steps {
+    width: 100%;
+    height: auto;
+    padding: calc(20 * var(--m));
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+    border: 0;
+    border-radius: calc(24 * var(--m)) calc(24 * var(--m)) 0 0;
+  }
+  .step {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    height: auto;
+    padding: calc(22 * var(--m)) calc(12 * var(--m));
+    gap: calc(4 * var(--m));
+    align-self: stretch;
+    border-radius: calc(14 * var(--m));
+  }
+  .step__head { flex-direction: column; gap: calc(4 * var(--m)); letter-spacing: -0.02em; line-height: 1.35; }
+  .step__no { font-size: calc(28 * var(--m)); letter-spacing: 0; }
+  .step__name { font-size: calc(38 * var(--m)); }
+  .step__desc { font-size: calc(24 * var(--m)); letter-spacing: -0.02em; }
+  .stage__arw svg { width: calc(19 * var(--m)); height: calc(11.547 * var(--m)); display: block; }
+
+  .stage__choice {
+    width: 100%;
+    height: auto;
+    padding: calc(18 * var(--m)) 0;
+    border-radius: 0 0 calc(24 * var(--m)) calc(24 * var(--m));
+    font-size: calc(36 * var(--m));
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+
+  /* 연결선 : 진로 선택 바 → 각 트랙 가운데로 세로 */
+  .link {
+    top: calc(299.3 * var(--m));   /* 공통 단계 높이 */
+    width: max(1px, calc(2 * var(--m)));
+    height: calc(40 * var(--m));
+    margin-left: calc(-1 * var(--m));
+  }
+  .link--1 { left: calc((100% - 24 * var(--m)) / 4); }
+  .link--2 { left: calc(100% - (100% - 24 * var(--m)) / 4); }
+  .link__dot {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: calc(-5.33 * var(--m));
+    width: calc(10.67 * var(--m));
+    height: calc(10.67 * var(--m));
+    margin: 0 0 0 calc(-5.33 * var(--m));
+  }
+
+  .tracks { flex-direction: row; gap: calc(24 * var(--m)); }
+  .track {
+    flex: 1 1 0;
+    min-width: 0;
+    align-items: center;
+    gap: calc(18 * var(--m));
+    padding: calc(26 * var(--m));
+    border-radius: calc(24 * var(--m));
+  }
+  .track__title { gap: calc(12 * var(--m)); font-size: calc(40 * var(--m)); line-height: 1.35; letter-spacing: -0.02em; }
+  .track__title .track__leaf { width: calc(56.1 * var(--m)); height: calc(36 * var(--m)); object-fit: contain; }
+  .track__steps { width: 100%; flex-direction: column; align-items: stretch; }
+  .tstep {
+    flex: none;
+    height: calc(68 * var(--m));
+    padding: 0;
+    flex-direction: row;
+    justify-content: center;
+    gap: calc(14 * var(--m));
+    border-radius: calc(14 * var(--m));
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+  .tstep__no { font-size: calc(26 * var(--m)); }
+  .tstep__name { font-size: calc(34 * var(--m)); letter-spacing: -0.02em; }
+  .tarw { height: calc(19 * var(--m)); }
+  .tarw svg { width: calc(19 * var(--m)); height: calc(11.547 * var(--m)); transform: rotate(90deg); }
+  .tleader {
+    flex: none;
+    height: calc(72 * var(--m));
+    border-radius: calc(14 * var(--m));
+    font-size: calc(34 * var(--m));
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* =========================================================
+   모션 (js-ready일 때만 – 스크립트가 없거나 '동작 줄이기' 설정이면 처음부터 보임)
+   섹션이 화면에 들어오면 .road.is-in → 각 요소가 --d 지연 후 순서대로 등장
+   ========================================================= */
+/* 트랙 안 단계 : 04 → 화살표 → 05 → 화살표 → 06 → 화살표 → 리더 (--t : 두 번째 트랙 시차) */
+.track__steps > li:nth-child(1) { --d: calc(2s + var(--t)); }
+.track__steps > li:nth-child(2) { --d: calc(2.15s + var(--t)); }
+.track__steps > li:nth-child(3) { --d: calc(2.25s + var(--t)); }
+.track__steps > li:nth-child(4) { --d: calc(2.4s + var(--t)); }
+.track__steps > li:nth-child(5) { --d: calc(2.5s + var(--t)); }
+.track__steps > li:nth-child(6) { --d: calc(2.65s + var(--t)); }
+.track__steps > li:nth-child(7) { --d: calc(2.75s + var(--t)); }
+.tleader .a--leaf { --d: calc(3.05s + var(--t)); }
+
+.js-ready .road__title .line__in { transform: translateY(110%); }
+.road.is-in .road__title .line__in { transform: none; transition: transform .9s var(--ease-out); }
+
+/* 기본 : 아래에서 떠오름 */
+.js-ready .a { opacity: 0; transform: translateY(16px); }
+.road.is-in .a {
+  opacity: 1;
+  transform: none;
+  transition: opacity .6s var(--ease-out) var(--d, 0s), transform .8s var(--ease-out) var(--d, 0s), clip-path .5s var(--ease-out) var(--d, 0s);
+}
+/* 트랙 카드 : pc는 왼쪽에서 / mob은 아래에서 */
+.js-ready .track.a { transform: translateX(-24px); }
+/* 화살표 : 왼쪽부터 그려짐 */
+.js-ready .a--clip-x { opacity: 1; transform: none; clip-path: inset(0 100% 0 0); }
+.road.is-in .a--clip-x { clip-path: inset(0 0 0 0); }
+/* 계단 화살표 : 아래(왼쪽)부터 위로 올라가 오른쪽으로 */
+.js-ready .a--clip-up { opacity: 1; transform: none; clip-path: inset(100% 100% 0 0); }
+.road.is-in .a--clip-up { clip-path: inset(0 0 0 0); transition: clip-path .5s cubic-bezier(.65, 0, .35, 1) var(--d); }
+/* 진로 선택 바 : pc는 위→아래 / mob은 왼쪽→오른쪽으로 펼쳐짐 */
+.js-ready .a--bar { opacity: 1; transform: none; clip-path: inset(0 0 100% 0); }
+.road.is-in .a--bar { clip-path: inset(0 0 0 0); transition: clip-path .6s cubic-bezier(.65, 0, .35, 1) var(--d); }
+/* 연결선 : 바에서 뻗어 나간 뒤 점이 톡 */
+.js-ready .a--link { opacity: 1; transform: scaleX(0); transform-origin: left center; }
+.road.is-in .a--link { transform: none; transition: transform .4s var(--ease-out) var(--d); }
+.js-ready .a--link .link__dot { transform: scale(0); }
+.road.is-in .a--link .link__dot { transform: none; transition: transform .45s var(--ease-back) calc(var(--d) + .3s); }
+/* 리더 상자 · 잎사귀 : 통통 튀며 등장 */
+.js-ready .a--pop { transform: scale(.7); }
+.road.is-in .a--pop { transition: opacity .4s var(--ease-out) var(--d), transform .6s var(--ease-back) var(--d); }
+.js-ready .a--leaf { transform: translateY(8px) scale(.4) rotate(-12deg); transform-origin: 50% 100%; }
+.road.is-in .a--leaf { transition: opacity .4s var(--ease-out) var(--d), transform .7s var(--ease-back) var(--d); }
+
+@media (max-width: 1199px) {
+  .js-ready .track.a { transform: translateY(24px); }
+  .js-ready .a--bar { clip-path: inset(0 100% 0 0); }
+  .js-ready .a--link { transform: scaleY(0); transform-origin: center top; }
+  .js-ready .track__title .track__leaf { opacity: 0; transform: scale(.4) rotate(-12deg); }
+  .road.is-in .track__title .track__leaf { opacity: 1; transform: none; transition: opacity .4s var(--ease-out) calc(3.05s + var(--t)), transform .7s var(--ease-back) calc(3.05s + var(--t)); }
+}
