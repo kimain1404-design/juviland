@@ -1,0 +1,153 @@
+/* =========================================================
+   쥬비랜드 main-section05 – 더 나은 내일을 약속합니다
+   main-section05(pc)  ≥ 1200px : 1600×512 시안을 화면 폭에 맞춰 비율 축소 (1600px 이상은 원본 크기)
+   main-section05(mob) ≤ 1199px : 1080×1080 시안 비율 (태블릿은 648px 폭에서 상한, 콘텐츠는 화면 폭을 채움)
+   섹션 높이를 시안 프레임 높이로 고정 → 라이브클래스 iframe 높이 식이 단순 (pc 32vw / mob 100vw)
+   모션 없음 : 화면 크기에만 반응하는 정적 레이아웃 (스크립트 없음)
+   ========================================================= */
+
+:root {
+  --surface: #ffffff;
+  --subtle: #f8f8f8;
+  --text-primary: #1f1f1f;
+  --text-secondary: #545454;
+  --stroke-subtle: #dedede;
+
+  /* 1600 시안 1px → 화면 px */
+  --u: min(100vw / 1600, 1px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background: var(--surface);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; }
+h2, h3, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+.mo-only { display: none; }
+
+/* ---------- Section ---------- */
+.promise { background: var(--surface); overflow: hidden; }
+.promise__inner {
+  width: calc(1600 * var(--u));
+  height: calc(512 * var(--u));   /* 시안 프레임 높이 */
+  margin: 0 auto;
+  padding: calc(80 * var(--u)) calc(200 * var(--u)) 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(32 * var(--u));
+}
+
+/* ---------- Header ---------- */
+.promise__head {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6 * var(--u));
+  text-align: center;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+.promise__title { font-size: calc(32 * var(--u)); font-weight: 600; }
+.promise__sub { font-size: calc(20 * var(--u)); font-weight: 400; color: var(--text-secondary); }
+
+/* ---------- Cards (pc : 3열) ---------- */
+.promise__cards { display: flex; gap: calc(24 * var(--u)); }
+.pcard {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(14 * var(--u));
+  padding: calc(28 * var(--u));
+  background: var(--surface);
+  border: max(1px, calc(1 * var(--u))) solid var(--stroke-subtle);
+  border-radius: calc(12 * var(--u));
+}
+.pcard__head { display: flex; flex-direction: column; gap: calc(14 * var(--u)); }
+.pcard__icon {
+  width: calc(56 * var(--u));
+  height: calc(56 * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--subtle);
+  border-radius: calc(16 * var(--u));
+  flex-shrink: 0;
+}
+.pcard__icon img { width: calc(24 * var(--u)); height: calc(24 * var(--u)); }
+.pcard__title {
+  font-size: calc(20 * var(--u));
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+.pcard__desc {
+  font-size: calc(16 * var(--u));
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  color: var(--text-secondary);
+}
+
+/* =========================================================
+   main-section05(mob) ≤ 1199px
+   ========================================================= */
+@media (max-width: 1199px) {
+  :root { --m: min(100vw / 1080, .6px); }
+
+  .pc-only { display: none; }
+  .mo-only { display: inline; }
+
+  .promise__inner {
+    width: 100%;
+    height: calc(1080 * var(--m));   /* 시안 프레임 높이 */
+    padding: calc(100 * var(--m)) calc(100vw * 60 / 1080);   /* 좌우 여백 = 모바일 시안 비율 */
+    gap: calc(40 * var(--m));
+  }
+  .promise__head { gap: 0; }
+  .promise__title { font-size: calc(56 * var(--m)); }
+  .promise__sub { font-size: calc(34 * var(--m)); line-height: 1.6; }
+
+  /* 카드 3줄 : 남은 높이를 똑같이 나눠 가짐 */
+  .promise__cards { flex: 1; min-height: 0; flex-direction: column; gap: calc(24 * var(--m)); }
+  .pcard {
+    flex: 1 1 0;
+    min-height: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: calc(36 * var(--m));
+    padding: calc(28 * var(--m)) calc(34 * var(--m));
+    border-width: max(1px, calc(1 * var(--m)));
+    border-radius: calc(28 * var(--m));
+    white-space: nowrap;   /* 줄바꿈을 모바일 시안과 똑같이 고정 */
+  }
+  .pcard__head { flex-direction: row; align-items: center; gap: calc(24 * var(--m)); flex-shrink: 0; }
+  .pcard__icon { width: calc(120 * var(--m)); height: calc(120 * var(--m)); border-radius: calc(24 * var(--m)); }
+  .pcard__icon img { width: calc(51.43 * var(--m)); height: calc(51.43 * var(--m)); }
+  .pcard__title { min-width: calc(184 * var(--m)); font-size: calc(34 * var(--m)); }   /* 시안 폭 184 (글꼴이 넓으면 늘어남) */
+  /* 구분선 + 설명 */
+  .pcard__desc {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    padding-left: calc(36 * var(--m));
+    font-size: calc(30 * var(--m));
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+  .pcard__desc::before {   /* 세로 구분선 140 */
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: max(1px, calc(1 * var(--m)));
+    height: calc(140 * var(--m));
+    margin-top: calc(-70 * var(--m));
+    background: var(--stroke-subtle);
+  }
+}
